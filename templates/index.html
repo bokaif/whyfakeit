@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Why Fake It</title>
+
+        <meta name="description" content="We work with a focus to reduce the spread of fake news and make this country a better place.">
+        <meta name="subject" content="WhyFakeIt, Startup & Technology">
+        <meta name="developer" content="Abdullah Al Mahmud">
+        
+        <link rel="shortcut icon" href="{{url_for('static', filename='images/logo/icon.png')}}">
+        <link rel="apple-touch-icon" href="{{url_for('static', filename='images/logo/icon.png')}}">
+
+        <!-- ==============================================
+        Vendor Stylesheet
+        =============================================== -->
+        <link rel="stylesheet" href="{{url_for('static', filename='assets/css/vendor/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='assets/css/vendor/slider.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='assets/css/main.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='assets/css/vendor/icons.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='assets/css/vendor/animation.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='assets/css/vendor/gallery.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='assets/css/vendor/cookie-notice.min.css')}}">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+
+        <!-- ==============================================
+        Custom Stylesheet
+        =============================================== -->
+        <link rel="stylesheet" href="{{url_for('static', filename='assets/css/default.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='assets/css/theme-light-blue.css')}}">
+
+        <!-- ==============================================
+        Theme Settings
+        =============================================== -->
+        <style>
+            :root {
+                --header-bg-color: #111117;
+                --nav-item-color: #f5f5f5;
+                --top-nav-item-color: #f5f5f5;
+                --hero-bg-color: #03071e;
+
+                --section-1-bg-color: #f5f5f5;
+                --section-2-bg-color: #111117;
+                --section-3-bg-color: #03071e;
+                --section-4-bg-color: #eeeeee;
+                --section-5-bg-color: #f5f5f5;
+                --section-6-bg-color: #111117;
+
+                --card-bg-color: #16161c;
+
+                --footer-bg-color: #16161c;
+            }
+        </style>
+        
+    </head>
+
+    <body>
+
+        <!-- Header -->
+        <header id="header">
+
+            <!-- Navbar -->
+            <nav data-aos="zoom-out" data-aos-delay="800" class="navbar navbar-expand">
+                <div class="container header">
+
+                    <!-- Navbar Brand-->
+                    <a class="navbar-brand" href="index.html">
+                        <img src="{{url_for('static', filename='images/logo/branding.png')}}" alt="Leverage">
+                    </a>
+
+                    <!-- Nav holder -->
+                    <div class="ml-auto"></div>
+
+                    <!-- Navbar Items -->
+                    <ul class="navbar-nav items">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Home </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">About </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active">Fake News Detector </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Awareness Blog </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Present Social Hoax </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Contact </a>
+                        </li>
+                    </ul>
+
+                    <!-- Navbar Toggle -->
+                    <ul class="navbar-nav toggle">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#menu">
+                                <i class="icon-menu m-0"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+        </header>
+
+        <section id="slider" class="hero odd p-0 featured" >
+            <div class="swiper-container no-slider animation slider-h-100">
+                <div class="swiper-wrapper">
+
+                    <!-- Item 1 -->
+                    <div class="swiper-slide slide-center">
+
+                        <!-- Particles -->
+                        <div id="particles-1" class="particles full-image" data-particle="bubble" data-mask="70"></div>    
+
+                        <div class="slide-content row" style="padding-top: 125px;">
+                            <div class="col-12 d-flex inner">
+                                <div class="center align-self-center text-center">
+                                    <h2 data-aos="zoom-out-up" data-aos-delay="400" class="title effect-static-text">Fake News Detector</h1>
+                                    <p data-aos="zoom-out-up" data-aos-delay="800" class="description ml-auto mr-auto">Paste the news in the bottom textarea.</p>
+                                    <div class="pform">                                    
+                                        <form action="{{ url_for('predict')}}" method="POST">
+                                            <textarea  name="message" rows="6" cols="20" required="required" style="font-size: 12pt">{{message}}</textarea>
+                                            <br> </br>
+                                            <button type="submit" class="btn primary-button"><i class="icon-globe"></i> Predict</button>
+                                    
+                                                <div class="results">
+                                    
+                                        {% if prediction == ['FAKE']%}
+                                        <h3 style="background: -webkit-linear-gradient(#eee, #636262);
+                                        -webkit-background-clip: text;
+                                        -webkit-text-fill-color: transparent">Seems Fake  <i class="fas fa-exclamation-triangle" style="background: -webkit-linear-gradient(#1a8fe3, #1E50BC);
+                                        -webkit-background-clip: text;
+                                        -webkit-text-fill-color: transparent;"></i></h3>
+                                        {% elif prediction == ['REAL']%}
+                                        <h3 style="background: -webkit-linear-gradient(#eee, #636262);
+                                        -webkit-background-clip: text;
+                                        -webkit-text-fill-color: transparent">Looks Real  <i class="fas fa-newspaper" style="background: -webkit-linear-gradient(#1a8fe3, #1E50BC);
+                                        -webkit-background-clip: text;
+                                        -webkit-text-fill-color: transparent;"></i></h3>
+                                        {% endif %}
+                                    
+                                        </div>
+                                    
+                                        </form>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+
+
+
+        <div id="menu" class="p-0 modal fade" role="dialog" aria-labelledby="menu" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-slideout" role="document">
+                <div class="modal-content full">
+                    <div class="modal-header" data-dismiss="modal">
+                        Menu <i class="icon-close"></i>
+                    </div>
+                    <div class="menu modal-body">
+                        <div class="row w-100">
+                            <div class="items p-0 col-12 text-center">
+                            </div>
+                            <div class="contacts p-0 col-12 text-center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <script src="{{url_for('static', filename='assets/js/vendor/jquery.min.js')}}"></script>
+        <script src="{{url_for('static', filename='assets/js/vendor/jquery.easing.min.js')}}"></script>
+        <script src="{{url_for('static', filename='assets/js/vendor/jquery.inview.min.js')}}"></script>
+        <script src="{{url_for('static', filename='assets/js/vendor/popper.min.js')}}"></script>
+        <script src="{{url_for('static', filename='assets/js/vendor/bootstrap.min.js')}}"></script>
+        <script src="{{url_for('static', filename='assets/js/vendor/ponyfill.min.js')}}"></script>
+        <script src="{{url_for('static', filename='assets/js/vendor/slider.min.js')}}"></script>
+        <script src="{{url_for('static', filename='assets/js/vendor/animation.min.js')}}"></script>
+        <script src="{{url_for('static', filename='assets/js/vendor/progress-radial.min.js')}}"></script>
+        <script src="{{url_for('static', filename='assets/js/vendor/bricklayer.min.js')}}"></script>
+        <script src="{{url_for('static', filename='assets/js/vendor/gallery.min.js')}}"></script>
+        <script src="{{url_for('static', filename='assets/js/vendor/shuffle.min.js')}}"></script>
+        <script src="{{url_for('static', filename='assets/js/vendor/cookie-notice.min.js')}}"></script>
+        <script src="{{url_for('static', filename='assets/js/vendor/particles.min.js')}}"></script>
+        <script src="{{url_for('static', filename='assets/js/main.js')}}"></script>
+
+        <!-- #endregion Global ========================= -->
+
+    </body>
+
+<!-- Mirrored from leverage.codings.dev/demo-3 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 06 Jan 2021 21:16:23 GMT -->
+</html>
